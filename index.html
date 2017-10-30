@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+ <html>
+  
+ 
+ <body>
+ 	 <input id="button" type="button" value="Search">
+ 	 
+ 	 <script>
+       var search = document.getElementById('button');
+       search.addEventListener('click', function(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('Get', 'request.php?q=definition');
+            xhttp.onload = function(){
+     	        if (xhttp.status === 200){
+     		        alert( xhttp.responseText);
+     		    }else{
+     			    alert('Failed.' + xhttp.status);
+     			}
+     	    };
+            xhttp.send();
+       });
+  </script>
+ </body>
+  
+</html> 
