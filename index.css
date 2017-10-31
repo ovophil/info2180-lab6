@@ -1,0 +1,29 @@
+h1{
+     background-color: #4286f4;
+     color: #ffffff;
+     padding: 15px;
+     border-radius: 4px;
+     margin: auto;
+     width: 85%;
+     font: 100% Garamond;
+     font-size: 2.25em
+ }
+ 
+ .container{
+     background-color: #cac8ce;
+     color: #000000;
+     padding: 15px;
+     margin: auto;
+     border-radius: 4px;
+     width: 85%;
+     height: auto;
+ }
+ 
+ #search{
+     border-bottom: 1px solid #e9e8ed;
+ }
+ 
+ #result{
+     font-size: 1em;
+     color: black;
+ } 

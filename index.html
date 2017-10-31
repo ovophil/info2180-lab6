@@ -1,25 +1,44 @@
 <!DOCTYPE html>
  <html>
+  <head>
+   <title>Dictionary</title>
+   <link href="index.css" type="text/css" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
   
- 
- <body>
- 	 <input id="button" type="button" value="Search">
- 	 
- 	 <script>
-       var search = document.getElementById('button');
-       search.addEventListener('click', function(){
-            var xhttp = new XMLHttpRequest();
-            xhttp.open('Get', 'request.php?q=definition');
-            xhttp.onload = function(){
-     	        if (xhttp.status === 200){
-     		        alert( xhttp.responseText);
-     		    }else{
-     			    alert('Failed.' + xhttp.status);
-     			}
-     	    };
-            xhttp.send();
-       });
-  </script>
- </body>
+  <body>
+    <div><h1>My Web Dictionary</h1></div>
+    
+   
+  	 <div class="container">
+     <div id="search">
+      <p>Look up any word (ajax, definition, bar, html, css, javascript or php) </p>
+      <input id="button" type="button" value="Search">
+  	   <input id="text" type="text" placeholder="Search......" required>
+     </div>
+     <div id="result"><h2>RESULT</h2></div>
+     
+    </div>
+  	 
+  	 <script type="text/javascript">
+        var search = document.getElementById('button');
+        var text = document.getElementById('text');
+        var result = document.getElementById('result');
+        search.addEventListener('click', function(){
+             var xhttp = new XMLHttpRequest();
+             xhttp.open('Get', 'request.php?q=definition');
+             xhttp.open('Get', 'request.php?q=' + text.value);
+             xhttp.onload = function(){
+      	        if (xhttp.status === 200){
+      		        text.innerHTML = xhttp.responseText;
+      		        result.innerHTML = xhttp.responseText;
+      		    }else{
+      			    alert('Failed.' + xhttp.status);
+      			}
+      	    };
+             xhttp.send();
+        });
+   </script>
+  </body>
   
 </html> 
