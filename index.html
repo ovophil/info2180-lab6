@@ -8,23 +8,24 @@
   
   <body>
     <div><h1>My Web Dictionary</h1></div>
-    
-   
   	 <div class="container">
      <div id="search">
       <p>Look up any word (ajax, definition, bar, html, css, javascript or php) </p>
+      <input id="button1" type="button" value="Get All Definitions">
       <input id="button" type="button" value="Search">
   	   <input id="text" type="text" placeholder="Search......" required>
-     </div>
+  	  </div>
      <div id="result"><h2>RESULT</h2></div>
-     
     </div>
+  </body>
   	 
   	 <script type="text/javascript">
         var search = document.getElementById('button');
         var text = document.getElementById('text');
         var result = document.getElementById('result');
-        search.addEventListener('click', function(){
+        
+        window.onload = function() {
+             search.addEventListener('click', function(){
              var xhttp = new XMLHttpRequest();
              xhttp.open('Get', 'request.php?q=definition');
              xhttp.open('Get', 'request.php?q=' + text.value);
@@ -38,6 +39,52 @@
       	    };
              xhttp.send();
         });
+        
+       
+        var button1 = document.querySelector('#button1');
+        button1.addEventListener('click', function(){
+        var httpReq = new XMLHttpRequest();
+         
+        var url = "request.php?=&all=true";
+        httpReq.onreadystatechange = button1;
+        httpReq.open('GET', url);
+        httpReq.send();
+        
+        var button1 = function() {
+            if (httpReq.readyState === XMLHttpRequest.DONE) {
+              if (httpReq.status === 200) {
+                var response = httpReq.responseXML;
+                var results = document.querySelector('#result');
+                var entries = response.getElementsByTagName('definition');
+                var list = document.createElement('ol');
+                results.appendChild(list);
+                for (var i = 0; i < entries.length; i++) {
+                    var def = document.createElement('li');
+                    var name = document.createTextNode(entries[i].getAttribute("name"));
+                    var p = document.createElement("p");
+                    var p1 = document.createElement("p");
+                    var header = document.createElement("h3");
+                    var text = document.createTextNode(entries[i].childNodes[0].nodeValue);
+                    var auth = document.createTextNode(entries[i].getAttribute("author"));
+                  
+                    
+                    header.appendChild(name);
+                    p.appendChild(text);
+                    p1.appendChild(auth);
+                    def.appendChild(header);
+                    def.appendChild(p);
+                    def.appendChild(p);
+                    list.appendChild(def);
+                    
+                
+                }
+              } else {
+                alert('Failure');
+              }
+            }
+        }
+    });
+};
    </script>
   </body>
   
